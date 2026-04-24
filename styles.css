@@ -1,0 +1,187 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Orbitron", sans-serif;
+  --font-body: "Poppins", sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-neon: var(--neon);
+  --color-ember: var(--ember);
+  --color-danger: var(--danger);
+  --color-warn: var(--warn);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Dark futuristic theme */
+  --background: oklch(0.05 0 0);
+  --foreground: oklch(0.96 0.02 150);
+  --card: oklch(0.09 0.01 150);
+  --card-foreground: oklch(0.96 0.02 150);
+  --popover: oklch(0.09 0.01 150);
+  --popover-foreground: oklch(0.96 0.02 150);
+
+  /* Neon green primary */
+  --primary: oklch(0.85 0.22 155);
+  --primary-foreground: oklch(0.08 0 0);
+
+  --secondary: oklch(0.14 0.02 150);
+  --secondary-foreground: oklch(0.96 0.02 150);
+  --muted: oklch(0.14 0.02 150);
+  --muted-foreground: oklch(0.7 0.04 150);
+  --accent: oklch(0.72 0.21 55);
+  --accent-foreground: oklch(0.08 0 0);
+
+  --destructive: oklch(0.62 0.25 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.2 0.03 150 / 60%);
+  --input: oklch(0.18 0.02 150);
+  --ring: oklch(0.85 0.22 155);
+
+  /* Brand tokens */
+  --neon: oklch(0.87 0.24 155);          /* #00ff9f-ish */
+  --ember: oklch(0.74 0.2 55);           /* #ff7a18-ish */
+  --danger: oklch(0.62 0.25 25);         /* red */
+  --warn: oklch(0.86 0.18 95);           /* yellow */
+
+  --gradient-hero: radial-gradient(ellipse at 50% 30%, color-mix(in oklab, var(--neon) 18%, transparent) 0%, transparent 60%),
+                   radial-gradient(ellipse at 80% 70%, color-mix(in oklab, var(--ember) 12%, transparent) 0%, transparent 55%);
+  --shadow-neon: 0 0 24px color-mix(in oklab, var(--neon) 55%, transparent),
+                 0 0 64px color-mix(in oklab, var(--neon) 25%, transparent);
+  --shadow-ember: 0 0 24px color-mix(in oklab, var(--ember) 55%, transparent);
+  --shadow-card: 0 10px 40px -12px color-mix(in oklab, var(--neon) 30%, transparent);
+}
+
+.dark {
+  --background: oklch(0.05 0 0);
+  --foreground: oklch(0.96 0.02 150);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
+  }
+}
+
+@layer utilities {
+  .text-neon { color: var(--neon); }
+  .text-ember { color: var(--ember); }
+  .text-danger { color: var(--danger); }
+  .text-warn { color: var(--warn); }
+
+  .bg-neon { background-color: var(--neon); }
+  .bg-ember { background-color: var(--ember); }
+
+  .glow-neon {
+    text-shadow: 0 0 12px color-mix(in oklab, var(--neon) 70%, transparent),
+                 0 0 32px color-mix(in oklab, var(--neon) 40%, transparent);
+  }
+  .glow-ember {
+    text-shadow: 0 0 12px color-mix(in oklab, var(--ember) 70%, transparent),
+                 0 0 32px color-mix(in oklab, var(--ember) 40%, transparent);
+  }
+
+  .shadow-neon { box-shadow: var(--shadow-neon); }
+  .shadow-ember { box-shadow: var(--shadow-ember); }
+  .shadow-card-glow { box-shadow: var(--shadow-card); }
+
+  .bg-hero { background-image: var(--gradient-hero); }
+
+  .panel {
+    background: linear-gradient(180deg,
+      color-mix(in oklab, var(--neon) 4%, var(--card)) 0%,
+      var(--card) 100%);
+    border: 1px solid color-mix(in oklab, var(--neon) 22%, transparent);
+    border-radius: 0.75rem;
+  }
+
+  .panel-ember {
+    border-color: color-mix(in oklab, var(--ember) 28%, transparent);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 16px color-mix(in oklab, var(--neon) 50%, transparent); }
+    50% { box-shadow: 0 0 32px color-mix(in oklab, var(--neon) 80%, transparent); }
+  }
+  .animate-pulse-glow { animation: pulse-glow 2.4s ease-in-out infinite; }
+
+  @keyframes float-y {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .animate-float { animation: float-y 5s ease-in-out infinite; }
+
+  @keyframes rover-drift {
+    0%   { transform: translateX(-6vw); }
+    50%  { transform: translateX(6vw); }
+    100% { transform: translateX(-6vw); }
+  }
+  @keyframes rover-vibrate {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    25%  { transform: translate(0.4px, -0.3px) rotate(-0.2deg); }
+    50%  { transform: translate(-0.3px, 0.4px) rotate(0.15deg); }
+    75%  { transform: translate(0.3px, 0.2px) rotate(-0.1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }
+}
+
+/* Make body transparent so the fixed atmosphere shows through */
+body {
+  background-color: var(--color-background);
+}
+
