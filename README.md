@@ -1,4 +1,5 @@
 # 🚀 AstraEdge – Energy-Efficient AI Rover Navigation
+https://astraedge-vision.lovable.app
 
 ## 📌 Overview
 
